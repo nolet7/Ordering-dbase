@@ -29,8 +29,7 @@ jobs:
         run: npm test | tee test-report.txt
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3.1.2  # ✅ Use a pinned version
+        uses: actions/upload-artifact@v3  # ✅ Use major version tag (safe and maintained)
         with:
           name: payment-service-tests
           path: test-report.txt
-
