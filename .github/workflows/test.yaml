@@ -1,13 +1,10 @@
-name: Run Payment Service Tests
+name: Test Payment Service
 
 on:
   push:
     paths:
-      - "payment-service/**"
-      - ".github/workflows/test.yaml"
-  pull_request:
-    paths:
-      - "payment-service/**"
+      - 'payment-service/**'
+      - '.github/workflows/test.yaml'
 
 jobs:
   test:
@@ -17,23 +14,22 @@ jobs:
         working-directory: payment-service
 
     steps:
-      - name: í³¦ Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js 18.x
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: âœ… Run Unit Tests with Jest
-        run: npm test
+      - name: Run tests
+        run: npm test | tee test-report.txt
 
-      - name: Upload Test Results (Optional)
-        if: always()
+      - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
-          name: test-results
-          path: payment-service/test-results
+          name: payment-service-tests
+          path: test-report.txt
