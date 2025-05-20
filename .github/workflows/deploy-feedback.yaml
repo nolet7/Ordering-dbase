@@ -1,0 +1,30 @@
+name: Build & Push Feedback Service
+
+on:
+  push:
+    paths:
+      - 'feedback-service/**'
+    branches:
+      - 'feedback-service/**'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - 'feedback-service/**'
+        uses: actions/checkout@v3
+
+      - 'feedback-service/**'
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - 'feedback-service/**'
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/feedback-service:latest ./feedback-service
+
+      - 'feedback-service/**'
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/feedback-service:latest
