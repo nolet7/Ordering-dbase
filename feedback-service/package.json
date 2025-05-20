@@ -1,5 +1,5 @@
 {
-  "name": "order-service",
+  "name": "feedback-service",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -7,8 +7,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "pg": "^8.7.1",
-    "redis": "^4.6.7"
+    "pg": "^8.7.1"
   }
 }
-

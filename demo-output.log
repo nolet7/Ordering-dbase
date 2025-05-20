@@ -1,0 +1,45 @@
+=============================
+⚙️  LSK ENGINEERING DEMO START
+=============================
+
+��� Creating Orders...
+
+➡️ Creating Order 1:
+{"order":{"order_id":1,"user_id":1,"product_id":101,"quantity":2,"status":"pending"},"source":"postgres"}
+➡️ Creating Order 2:
+{"order":{"order_id":2,"user_id":2,"product_id":102,"quantity":1,"status":"pending"},"source":"postgres"}
+➡️ Creating Order 3:
+{"order":{"order_id":3,"user_id":3,"product_id":103,"quantity":4,"status":"pending"},"source":"postgres"}
+��� Submitting Payments...
+
+➡️ Paying for Order ID: 1
+{"message":"��� Payment processed successfully"}
+➡️ Paying for Order ID: 2
+{"message":"��� Payment processed successfully"}
+➡️ Paying for Order ID: 3
+{"message":"��� Payment processed successfully"}
+⭐ Submitting Feedback...
+
+➡️ Feedback for Order ID: 1
+{"message":"⭐ Feedback submitted successfully"}
+➡️ Feedback for Order ID: 2
+{"message":"⭐ Feedback submitted successfully"}
+➡️ Feedback for Order ID: 3
+{"message":"⭐ Feedback submitted successfully"}
+��� Retrieving Orders (1st time = PostgreSQL)...
+
+➡️ Order ID: 1
+{"order":{"order_id":1,"user_id":1,"product_id":101,"quantity":2,"status":"paid"},"source":"postgres"}
+➡️ Order ID: 2
+{"order":{"order_id":2,"user_id":2,"product_id":102,"quantity":1,"status":"paid"},"source":"postgres"}
+➡️ Order ID: 3
+{"order":{"order_id":3,"user_id":3,"product_id":103,"quantity":4,"status":"paid"},"source":"postgres"}
+��� Retrieving Orders Again (should hit Redis cache)...
+
+➡️ Order ID: 1
+{"order":{"order_id":1,"user_id":1,"product_id":101,"quantity":2,"status":"paid"},"source":"cache"}
+➡️ Order ID: 2
+{"order":{"order_id":2,"user_id":2,"product_id":102,"quantity":1,"status":"paid"},"source":"cache"}
+➡️ Order ID: 3
+{"order":{"order_id":3,"user_id":3,"product_id":103,"quantity":4,"status":"paid"},"source":"cache"}
+✅ Demo Completed Successfully

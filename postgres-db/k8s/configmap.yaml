@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+data:
+  init.sql: |
+    CREATE DATABASE orders_db;
+
+    \c orders_db;
+
+    CREATE TABLE orders (
+        order_id SERIAL PRIMARY KEY,
+        user_id INT,
+        product_id INT,
+        quantity INT,
+        status VARCHAR(20) DEFAULT 'pending'
+    );

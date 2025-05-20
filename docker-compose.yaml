@@ -1,0 +1,79 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: orders_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  order-service:
+    build: ./order-service
+    container_name: order-service
+    ports:
+      - "5000:5000"
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGHOST=postgres
+      - PGDATABASE=orders_db
+      - PGPORT=5432
+    depends_on:
+      - postgres
+      - redis
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    ports:
+      - "5001:5001"
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGHOST=postgres
+      - PGDATABASE=orders_db
+      - PGPORT=5432
+    depends_on:
+      - postgres
+
+  feedback-service:
+    build: ./feedback-service
+    container_name: feedback-service
+    ports:
+      - "5002:5002"
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGHOST=postgres
+      - PGDATABASE=orders_db
+      - PGPORT=5432
+    depends_on:
+      - postgres
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  nginx-ui:
+    image: nginx:alpine
+    container_name: nginx-ui
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public-ui:/usr/share/nginx/html:ro
+    depends_on:
+      - order-service
+      - payment-service
+      - feedback-service
+
+volumes:
+  pgdata:
