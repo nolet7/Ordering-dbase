@@ -1,30 +1,3 @@
 name: Build & Push Order Service
 
 on:
-  push:
-    paths:
-      - 'order-service/**'
-    branches:
-      - 'order-service/**'
-
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-
-    steps:
-      - 'order-service/**'
-        uses: actions/checkout@v3
-
-      - 'order-service/**'
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - 'order-service/**'
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/order-service:latest ./order-service
-
-      - 'order-service/**'
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/order-service:latest
