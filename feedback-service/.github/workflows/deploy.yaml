@@ -1,4 +1,4 @@
-name: Build & Push Feedback Service
+name: Build & Push Feedback-service
 
 on:
   push:

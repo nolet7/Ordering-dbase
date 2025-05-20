@@ -1,9 +1,9 @@
-name: Build & Push Payment-service
+name: Build & Push Order-service
 
 on:
   push:
     paths:
-      - 'payment-service/**'
+      - 'order-service/**'
     branches:
       - main
 
@@ -27,6 +27,6 @@ jobs:
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./payment-service
+          context: ./order-service
           push: true
-          tags: noletengine/payment-service:latest
+          tags: noletengine/order-service:latest
